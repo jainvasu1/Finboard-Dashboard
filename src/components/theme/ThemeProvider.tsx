@@ -1,1 +1,28 @@
-"use client"; import { useEffect } from "react"; import { useThemeStore } from "@/store/themeStore"; export default function ThemeProvider({ children, }: { children: React.ReactNode; }) { const { theme, setTheme } = useThemeStore(); useEffect(() => { const savedTheme = localStorage.getItem("theme") as | "light" | "dark" | null; if (savedTheme) { setTheme(savedTheme); } }, [setTheme]); useEffect(() => { const root = document.documentElement; if (theme === "dark") { root.classList.add("dark"); } else { root.classList.remove("dark"); } localStorage.setItem("theme", theme); }, [theme]); return <>{children}</>; }
+"use client";
+
+import { useEffect, useState } from "react";
+import { useThemeStore } from "@/store/themeStore";
+
+export default function ThemeProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { theme } = useThemeStore();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    const html = document.documentElement;
+    html.classList.toggle("dark", theme === "dark");
+  }, [theme, mounted]);
+
+  if (!mounted) return null;
+
+  return <>{children}</>;
+}

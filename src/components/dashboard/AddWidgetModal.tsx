@@ -32,9 +32,8 @@ export default function AddWidgetModal({
         onClick={onClose}
       />
 
-
       <div
-        className={`relative z-10 w-full rounded-xl border border-white/10 bg-[#020617] p-6 transition-all duration-300
+        className={`relative w-full rounded-xl border border-white/10 bg-[#020617] p-6 transition-all duration-300
         ${isApiVerified ? "max-w-xl" : "max-w-md"}`}
       >
         <div className="mb-5 flex items-center justify-between">
@@ -48,6 +47,7 @@ export default function AddWidgetModal({
             ✕
           </button>
         </div>
+
         <div className="space-y-4">
           <div>
             <label className="text-sm text-gray-400">
@@ -58,8 +58,11 @@ export default function AddWidgetModal({
               className="mt-1 w-full rounded-md bg-white/5 px-3 py-2 text-white outline-none"
             />
           </div>
+
           <div>
-            <label className="text-sm text-gray-400">API URL</label>
+            <label className="text-sm text-gray-400">
+              API URL
+            </label>
             <div className="mt-1 flex gap-2">
               <input
                 placeholder="https://api.example.com/data"
@@ -74,6 +77,7 @@ export default function AddWidgetModal({
               </button>
             </div>
           </div>
+
           <div>
             <label className="text-sm text-gray-400">
               Refresh Interval (seconds)
@@ -88,7 +92,7 @@ export default function AddWidgetModal({
           {isApiVerified && (
             <>
               <div className="rounded-md bg-emerald-500/15 px-3 py-2 text-sm text-emerald-400">
-                 API connection verified successfully
+                API connection verified successfully
               </div>
 
               <div>

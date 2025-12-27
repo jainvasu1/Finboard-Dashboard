@@ -1,18 +1,20 @@
 "use client";
 
-import { useThemeStore } from "@/store/themeStore";
+import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const { theme, toggleTheme } = useThemeStore();
+  const [dark, setDark] = useState(true);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+  }, [dark]);
 
   return (
     <button
-      onClick={toggleTheme}
-      className="flex items-center gap-2 rounded-md border border-white/10 px-3 py-2 text-sm 
-      bg-white/5 text-gray-200 hover:bg-white/10
-      dark:bg-white/10 dark:text-white"
+      onClick={() => setDark(!dark)}
+      className="text-xl text-gray-300 hover:scale-110 transition"
     >
-      {theme === "dark" ? "🌙 Dark" : "🌞 Light"}
+      {dark ? "🌙" : "☀️"}
     </button>
   );
 }
