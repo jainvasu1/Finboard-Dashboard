@@ -2,23 +2,26 @@
 
 import { useState } from "react";
 
-interface Props {
+interface AddWidgetModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function AddWidgetModal({ isOpen, onClose }: Props) {
-  const [tested, setTested] = useState(false);
-  const [loading, setLoading] = useState(false);
+export default function AddWidgetModal({
+  isOpen,
+  onClose,
+}: AddWidgetModalProps) {
+  const [isApiVerified, setIsApiVerified] = useState(false);
+  const [isTestingApi, setIsTestingApi] = useState(false);
 
   if (!isOpen) return null;
 
-  const testApi = () => {
-    setLoading(true);
+  const handleTestApi = () => {
+    setIsTestingApi(true);
 
     setTimeout(() => {
-      setTested(true);
-      setLoading(false);
+      setIsTestingApi(false);
+      setIsApiVerified(true);
     }, 1000);
   };
 
