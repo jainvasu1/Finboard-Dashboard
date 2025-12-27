@@ -3,27 +3,22 @@
 import { useEffect } from "react";
 import { useThemeStore } from "@/store/themeStore";
 
-export default function ThemeProvider(props: any) {
-  const theme = useThemeStore((state) => state.theme);
-  const setTheme = useThemeStore((state) => state.setTheme);
+export default function ThemeProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { theme } = useThemeStore();
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
+    const html = document.documentElement;
 
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-  }, []);
-
-  useEffect(() => {
     if (theme === "dark") {
-      document.documentElement.classList.add("dark");
+      html.classList.add("dark");
     } else {
-      document.documentElement.classList.remove("dark");
+      html.classList.remove("dark");
     }
-
-    localStorage.setItem("theme", theme);
   }, [theme]);
 
-  return <>{props.children}</>;
+  return <>{children}</>;
 }
