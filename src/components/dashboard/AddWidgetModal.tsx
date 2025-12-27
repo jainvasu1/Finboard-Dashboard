@@ -43,4 +43,35 @@ AddWidgetModalProps ) {
     console.log("WIDGET ADDED:", payload);
     onClose();
   };
+
+  return (
+    <div className="fixed insert-0 z-50 flex items-center justify-center">
+    <div
+    onClick={onClose}
+    className="absolute insert-0 bg-black/60 backdrop-blur-sm"/>
+
+    <div className="relative z-10 w-full max-w-md rounded-xl border border-white/10 bg-[#020617] p-6">
+    <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-white">
+            Add New Widget
+          </h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-white">
+            ✕
+          </button>
+        </div>
+    <div className="space-y-4">
+          {/* Widget Name */}
+          <div>
+            <label className="text-sm text-gray-400">Widget Name</label>
+            <input
+              value={widgetName}
+              onChange={(e) => setWidgetName(e.target.value)}
+              className="mt-1 w-full rounded-md bg-white/5 px-3 py-2 text-white"
+              placeholder="Bitcoin Price"
+            />
+          </div>
+
   
+
+
+  )
