@@ -87,9 +87,79 @@ AddWidgetModalProps ) {
               </button>
             </div>
           </div>
+
+          {errorMessage && (
+            <p className="text-sm text-red-400">{errorMessage}</p>
+          )}
+
+          {isApiVerified && (
+            <div className="rounded-md bg-emerald-500/15 px-3 py-2 text-sm text-emerald-400">
+               API connection successful
+            </div>
+          )}
+
+
+           {isApiVerified && (
+            <>
+              <div>
+                <label className="text-sm text-gray-400">
+                  Refresh Interval (seconds)
+                </label>
+                <input
+                  type="number"
+                  value={refreshInterval}
+                  onChange={(e) => setRefreshInterval(Number(e.target.value))}
+                  className="mt-1 w-full rounded-md bg-white/5 px-3 py-2 text-white"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-400">
+                  Display Mode
+                </label>
+                <div className="mt-2 flex gap-2">
+                  {["card", "table", "chart"].map((mode) => (
+                    <button
+                      key={mode}
+                      onClick={() => setDisplayMode(mode as DisplayMode)}
+                      className={`rounded px-3 py-1 text-sm ${
+                        displayMode === mode
+                          ? "bg-emerald-500 text-white"
+                          : "bg-white/10 text-gray-300"
+                      }`}
+                    >
+                      {mode}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-md bg-white/5 px-3 py-2 text-sm text-gray-400">
+                Field selection will appear here…
+              </div>
+            </>
+          )}
+        </div>
+        <div className="mt-6 flex justify-end gap-3">
+          <button onClick={onClose} className="text-gray-400">
+            Cancel
+          </button>
+          <button
+            onClick={handleAddWidget}
+            disabled={!isApiVerified}
+            className="rounded-md bg-emerald-500 px-4 py-2 text-white disabled:opacity-50"
+          >
+            Add Widget
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+      
   
 
   
 
 
-  )
+  
