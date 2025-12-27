@@ -60,7 +60,6 @@ AddWidgetModalProps ) {
           </button>
         </div>
     <div className="space-y-4">
-          {/* Widget Name */}
           <div>
             <label className="text-sm text-gray-400">Widget Name</label>
             <input
@@ -70,6 +69,25 @@ AddWidgetModalProps ) {
               placeholder="Bitcoin Price"
             />
           </div>
+                <div>
+            <label className="text-sm text-gray-400">API URL</label>
+            <div className="mt-1 flex gap-2">
+              <input
+                value={apiUrl}
+                onChange={(e) => setApiUrl(e.target.value)}
+                className="flex-1 rounded-md bg-white/5 px-3 py-2 text-white"
+                placeholder="https://api.example.com/data"
+              />
+              <button
+                onClick={handleTestApi}
+                disabled={isTestingApi}
+                className="rounded-md bg-emerald-500 px-3 text-white disabled:opacity-50"
+              >
+                {isTestingApi ? "Testing..." : "Test"}
+              </button>
+            </div>
+          </div>
+  
 
   
 
