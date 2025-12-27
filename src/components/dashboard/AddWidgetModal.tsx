@@ -2,46 +2,24 @@
 
 import { useState } from "react";
 
-interface AddWidgetModalProps {
+interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
 
-type DisplayMode = "card" | "table" | "charts";
-
-export default function AddWidgetModal({
-  isOpen,
-  onClose,
-};
-AddWidgetModalProps ) {
-  const [widgetName, setWidgetName] = useState("");
-  const [apiurl, setApiUrl] = useState("");
-  const [refreshinterval, setRefreshInterval] = useState(30);
-  const [displayMode, setDisplayMode] = useState<DisplayMode>("card");
-  const [isTesting, setIsTesting] = useState(false);
-  const [isApiVerified, setIsApiVerified] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+export default function AddWidgetModal({ isOpen, onClose }: Props) {
+  const [tested, setTested] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleTestApi = async () => {
-    if (!apiurl.trim()) { setErrorMessage("API URL is required");
-      return ;
-    }
-
-    setErrorMessage("");
-    setIsTesting(true);
-
+  const testApi = () => {
+    setLoading(true);
 
     setTimeout(() => {
-      setIsApiVerified(true);
-      setIsTesting(false);
-    }, 2000);
-      
-    };
-
-    console.log("WIDGET ADDED:", payload);
-    onClose();
+      setTested(true);
+      setLoading(false);
+    }, 1000);
   };
 
   return (
