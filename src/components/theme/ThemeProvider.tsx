@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -8,18 +9,39 @@ export default function ThemeProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { theme } = useThemeStore();
+  const { theme, setTheme } = useThemeStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    const savedTheme = localStorage.getItem("theme") as
+      | "light"
+      | "dark"
+      | null;
+
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+    
+    // Use setTimeout to avoid synchronous setState in effect
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 0);
+    
+    return () => clearTimeout(timer);
+  }, [setTheme]);
 
   useEffect(() => {
     if (!mounted) return;
 
     const html = document.documentElement;
-    html.classList.toggle("dark", theme === "dark");
+
+    if (theme === "dark") {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
+
+    localStorage.setItem("theme", theme);
   }, [theme, mounted]);
 
   if (!mounted) return null;
